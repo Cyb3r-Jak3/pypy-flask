@@ -29,6 +29,18 @@ jobs:
         username: ${{ secrets.GITLAB_USER }}
         password: ${{ secrets.GITLAB_TOKEN }}
 
+
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask:latest,registry.gitlab.com/cyb3r-jak3/pypy-flask:latest
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1.1.0
 
@@ -50,10 +62,11 @@ jobs:
         cache-to: type=local,dest=/tmp/.buildx-cache
         push: ${{ github.ref == 'refs/heads/main' }}
         file: Dockerfile
-        tags: |
-          cyb3rjak3/pypy-flask:latest
-          ghcr.io/cyb3r-jak3/pypy-flask:latest
-          registry.gitlab.com/cyb3r-jak3/pypy-flask:latest
+        tags: ${{ steps.meta.outputs.tags }}
+    - name: Check dir
+      run: |
+        ls -la
+        echo ${{ steps.meta.outputs.tags }}
     -
       name: Update repo description
       # if: ${{ github.ref == 'refs/heads/main' }}
