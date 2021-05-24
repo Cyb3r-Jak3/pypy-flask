@@ -55,12 +55,15 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
+        flavor: |
+          latest=auto
+          suffix=-alpine
         tags: |
-          type=ref,event=branch-alpine
-          type=ref,event=pr-alpine
-          type=semver,pattern={{version}}-alpine
-          type=semver,pattern={{major}}.{{minor}}-alpine
-          type=sha-alpine
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=sha
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
