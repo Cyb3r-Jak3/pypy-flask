@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    -
-      name: Checkout
+    - name: Checkout
       uses: actions/checkout@v2
 
     - name: Login to Docker
@@ -32,7 +31,6 @@ jobs:
         registry: registry.gitlab.com
         username: ${{ secrets.GITLAB_USER }}
         password: ${{ secrets.GITLAB_TOKEN }}
-
 
     - name: Docker Meta
       id: meta
@@ -76,8 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    -
-      name: Checkout
+    - name: Checkout
       uses: actions/checkout@v2
 
     - name: Login to Docker
@@ -126,7 +123,7 @@ jobs:
       uses: actions/cache@v2.1.5
       with:
         path: /tmp/.buildx-cache
-        key: buildx-apline-${{ github.sha }}
+        key: buildx-alpine-${{ github.sha }}
         restore-keys: buildx-alpine
 
     - name: Alpine Build and Push
