@@ -65,6 +65,6 @@ jobs:
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
-        push: ${{ github.ref == 'refs/heads/main' }}
+        push: ${{ startsWith(github.ref, 'refs/tags/v') }}
         file: Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
