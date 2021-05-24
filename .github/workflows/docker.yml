@@ -34,8 +34,8 @@ jobs:
         password: ${{ secrets.GITLAB_TOKEN }}
 
 
-    - name: Docker meta
-      id: meta
+    - name: Slim meta
+      id: slim_meta
       uses: docker/metadata-action@v3
       with:
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
@@ -45,6 +45,26 @@ jobs:
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
           type=sha
+        labels: |
+          org.label-schema.vcs-url="https://github.com/Cyb3r-Jak3/pypy-flask.git"
+          org.label-schema.schema-version="1.0.0-rc1"
+          org.opencontainers.image.source="https://github.com/Cyb3r-Jak3/pypy-flask"
+
+    - name: Alpine meta
+      id: alpine_meta
+      uses: docker/metadata-action@v3
+      with:
+        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
+        tags: |
+          type=ref,event=branch-alpine
+          type=ref,event=pr-alpine
+          type=semver,pattern={{version}}-alpine
+          type=semver,pattern={{major}}.{{minor}}-alpine
+          type=sha-alpine
+        labels: |
+          org.label-schema.vcs-url="https://github.com/Cyb3r-Jak3/pypy-flask.git"
+          org.label-schema.schema-version="1.0.0-rc1"
+          org.opencontainers.image.source="https://github.com/Cyb3r-Jak3/pypy-flask"
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1.1.0
@@ -59,7 +79,7 @@ jobs:
         key: buildx-${{ github.sha }}
         restore-keys: buildx
 
-    - name: Build and Push
+    - name: Slim Build and Push
       uses: docker/build-push-action@v2.4.0
       with:
         platforms: linux/amd64,linux/arm64
@@ -67,4 +87,14 @@ jobs:
         cache-to: type=local,dest=/tmp/.buildx-cache
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
         file: Dockerfile
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.slim_meta.outputs.tags }}
+
+    - name: Alpine Build and Push
+      uses: docker/build-push-action@v2.4.0
+      with:
+        platforms: linux/amd64,linux/arm64
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache
+        push: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        file: alpine.Dockerfile
+        tags: ${{ steps.alpine_meta.outputs.tags }}

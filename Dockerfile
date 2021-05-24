@@ -1,9 +1,5 @@
 FROM pypy:3-slim
 
-LABEL org.label-schema.vcs-url="https://github.com/Cyb3r-Jak3/pypy-flask.git" \
-      org.label-schema.schema-version="1.0.0-rc1" \
-      org.opencontainers.image.source="https://github.com/Cyb3r-Jak3/pypy-flask"
-
 COPY requirements.txt /tmp/pip-tmp/
 RUN apt-get update \
    && apt install --no-install-recommends -y build-essential \
