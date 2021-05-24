@@ -24,3 +24,11 @@ You can replace the FROM image with any of the following:
 - ghcr.io/cyb3r-jak3/pypy-flask:latest
 - cyb3rjak3/pypy-flask:latest
 - registry.gitlab.com/cyb3r-jak3/pypy-flask:latest
+
+### Alpine
+
+There are also alpine based images avaiable. All alpine images end with `-alpine`
+
+- ghcr.io/cyb3r-jak3/pypy-flask:latest-alpine
+- cyb3rjak3/pypy-flask:latest-alpine
+- registry.gitlab.com/cyb3r-jak3/pypy-flask:latest-alpine
