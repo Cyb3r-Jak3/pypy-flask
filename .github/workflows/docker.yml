@@ -46,9 +46,9 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
           type=sha
         labels: |
-          org.label-schema.vcs-url="https://github.com/Cyb3r-Jak3/pypy-flask.git"
-          org.label-schema.schema-version="1.0.0-rc1"
-          org.opencontainers.image.source="https://github.com/Cyb3r-Jak3/pypy-flask"
+          org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
+          org.label-schema.schema-version=1.0.0-rc1
+          org.opencontainers.image.source=https://github.com/Cyb3r-Jak3/pypy-flask
 
     - name: Alpine meta
       id: alpine_meta
@@ -62,9 +62,9 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}-alpine
           type=sha-alpine
         labels: |
-          org.label-schema.vcs-url="https://github.com/Cyb3r-Jak3/pypy-flask.git"
-          org.label-schema.schema-version="1.0.0-rc1"
-          org.opencontainers.image.source="https://github.com/Cyb3r-Jak3/pypy-flask"
+          org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
+          org.label-schema.schema-version=1.0.0-rc1
+          org.opencontainers.image.source=https://github.com/Cyb3r-Jak3/pypy-flask
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1.1.0
