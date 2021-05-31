@@ -1,4 +1,4 @@
-FROM jamiehewland/alpine-pypy:alpine3.11
+FROM jamiehewland/alpine-pypy:3-alpine3.11
 
 
 RUN apk add --no-cache libffi-dev gcc musl-dev make build-base
