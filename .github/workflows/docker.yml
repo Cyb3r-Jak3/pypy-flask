@@ -63,7 +63,7 @@ jobs:
         restore-keys: buildx-slim
 
     - name: Slim Build and Push
-      uses: docker/build-push-action@v2.4.0
+      uses: docker/build-push-action@v2.5.0
       with:
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
@@ -133,7 +133,7 @@ jobs:
         restore-keys: buildx-alpine
 
     - name: Alpine Build and Push
-      uses: docker/build-push-action@v2.4.0
+      uses: docker/build-push-action@v2.5.0
       with:
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
