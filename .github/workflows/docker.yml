@@ -2,6 +2,14 @@ name: Docker
 
 on:
   push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+    paths:
+      - .github/workflows/docker.yml
+      - *.Dockerfile
+      - requirements.txt
 
 
 jobs:
