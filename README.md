@@ -1,6 +1,6 @@
 # Pypy3-Flask
 
-Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is avaiable from DockerHub, Github, and Gitlab.
+Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is available from DockerHub, Github, and Gitlab.
 
 ## Using
 
@@ -27,7 +27,7 @@ You can replace the FROM image with any of the following:
 
 ### Alpine
 
-There are also alpine based images avaiable. All alpine images end with `-alpine`
+There are also alpine based images available. All alpine images end with `-alpine`
 
 - ghcr.io/cyb3r-jak3/pypy-flask:latest-alpine
 - cyb3rjak3/pypy-flask:latest-alpine
