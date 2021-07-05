@@ -55,6 +55,8 @@ jobs:
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
+          maintainer=Cyb3r Jak3 jake@jwhite.network
+          org.opencontainers.image.vendor=cyb3rjak3
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1.2.0
