@@ -118,7 +118,7 @@ jobs:
       with:
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         flavor: |
-          suffix=-alpine,onlastest=true
+          suffix=-alpine,onlatest=true
         tags: |
           type=ref,event=pr
           type=semver,pattern={{version}}
