@@ -60,7 +60,7 @@ jobs:
         restore-keys: buildx-${{ matrix.version }}
 
     - name: Alpine Meta
-      id: meta-alpine
+      id: meta
       if: ${{ matrix.version == 'alpine' }}
       uses: docker/metadata-action@v3.4.1
       with:
@@ -78,7 +78,7 @@ jobs:
           org.opencontainers.image.vendor=cyb3rjak3
 
     - name: Slim Meta
-      id: meta-slim
+      id: meta
       if: ${{ matrix.version == 'slim' }}
       uses: docker/metadata-action@v3.4.1
       with:
@@ -92,17 +92,13 @@ jobs:
           org.label-schema.schema-version=1.0.0-rc1
           maintainer=Cyb3r Jak3 jake@jwhite.network
           org.opencontainers.image.vendor=cyb3rjak3
-    
-    - name: Set output
-      id: version-setter
-      run: |
-        echo '::set-output name=version::steps.meta-${{ matrix.version }}.outputs.bake-file'
+
 
     - name: Bake
       uses: docker/bake-action@v1.5.0
       with:
         files: |
-          ${{ steps.version-setter.outputs.version }}
+          ${{ steps.meta.outputs.bake-file }}
           ./docker-bake.hcl
         targets: ${{ matrix.version }}-release
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
