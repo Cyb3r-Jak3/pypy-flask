@@ -59,7 +59,7 @@ jobs:
         key: buildx-${{ matrix.version }}-${{ github.sha }}
         restore-keys: buildx-${{ matrix.version }}
 
-    - name: Docker Meta
+    - name: Alpine Meta
       id: meta-alpine
       if: ${{ matrix.version == 'alpine' }}
       uses: docker/metadata-action@v3.4.1
@@ -77,7 +77,7 @@ jobs:
           maintainer=Cyb3r Jak3 jake@jwhite.network
           org.opencontainers.image.vendor=cyb3rjak3
 
-    - name: Docker Meta
+    - name: Slim Meta
       id: meta-slim
       if: ${{ matrix.version == 'slim' }}
       uses: docker/metadata-action@v3.4.1
@@ -97,9 +97,9 @@ jobs:
       uses: docker/bake-action@v1.5.0
       with:
         files: |
-          ${{ steps.meta.outputs.bake-file }}
+          ${{ steps.meta-${{ matrix.version }}.outputs.bake-file }}
           ./docker-bake.hcl
-        targets: ${{matrix.version }}-release
+        targets: ${{ matrix.version }}-release
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
         set: |
           *.cache-from=type=local,src=/tmp/.buildx-cache
