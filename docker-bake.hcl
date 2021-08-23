@@ -43,7 +43,7 @@ target "slim-release" {
 }
 
 target "alpine-release" {
-    inherits = ["alpine", "docker-metadata-action"]
+    inherits = ["docker-metadata-action", "alpine"]
     cache-to = [
         "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
     ]
