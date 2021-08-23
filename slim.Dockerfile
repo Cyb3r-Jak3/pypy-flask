@@ -1,4 +1,4 @@
-FROM pypy:3-slim
+FROM pypy:3-slim-buster
 
 COPY requirements.txt /tmp/pip-tmp/
 RUN apt-get update \
