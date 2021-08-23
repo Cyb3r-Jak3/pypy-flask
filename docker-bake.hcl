@@ -34,6 +34,12 @@ target "slim-release" {
     cache-from = [
         "ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
     ]
+// See https://github.com/Cyb3r-Jak3/pypy-flask/issues/20
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/386",
+    ]
 }
 
 target "alpine-release" {
