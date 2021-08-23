@@ -28,7 +28,6 @@ jobs:
 
     - name: Login To GitHub
       uses: docker/login-action@v1
-      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
@@ -44,7 +43,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v3.4.1
+      uses: docker/metadata-action@v3.5.0
       with:
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         tags: |
@@ -63,32 +62,16 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1.5.1
 
-    - name: Cache Docker layers
-      uses: actions/cache@v2.1.6
-      with:
-        path: /tmp/.buildx-cache
-        key: buildx-slim-${{ github.sha }}
-        restore-keys: buildx-slim
-
     - name: Slim Build and Push
-      uses: docker/build-push-action@v2.6.1
+      uses: docker/build-push-action@v2.7.0
       with:
-        platforms: linux/amd64,linux/arm64,linux/386,linux/s390x
-        cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+        platforms: linux/amd64,linux/arm64,linux/386
+        cache-from: ghcr.io/cyb3r-jak3/pypy-flask:slim-cache
+        cache-to: type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:slim-cache
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
         file: slim.Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-
-    -
-      # Temp fix
-      # https://github.com/docker/build-push-action/issues/252
-      # https://github.com/moby/buildkit/issues/1896
-      name: Move cache
-      run: |
-        rm -rf /tmp/.buildx-cache
-        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
   Alpine:
     runs-on: ubuntu-latest
@@ -106,7 +89,6 @@ jobs:
 
     - name: Login To GitHub
       uses: docker/login-action@v1 
-      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
@@ -122,7 +104,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v3.4.1
+      uses: docker/metadata-action@v3.5.0
       with:
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         flavor: |
@@ -143,29 +125,13 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1.5.1
 
-    - name: Cache Docker layers
-      uses: actions/cache@v2.1.6
-      with:
-        path: /tmp/.buildx-cache
-        key: buildx-alpine-${{ github.sha }}
-        restore-keys: buildx-alpine
-
     - name: Alpine Build and Push
-      uses: docker/build-push-action@v2.6.1
+      uses: docker/build-push-action@v2.7.0
       with:
         platforms: linux/amd64,linux/arm64,linux/386,linux/s390x
-        cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+        cache-from: ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache
+        cache-to: type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
         file: alpine.Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-
-    -
-      # Temp fix
-      # https://github.com/docker/build-push-action/issues/252
-      # https://github.com/moby/buildkit/issues/1896
-      name: Move cache
-      run: |
-        rm -rf /tmp/.buildx-cache
-        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
