@@ -28,7 +28,7 @@ target "docker-metadata-action" {
 
 target "slim-release" {
     inherits = ["slim", "docker-metadata-action"]
-        cache-to = [
+    cache-to = [
         "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
     ]
     cache-from = [
