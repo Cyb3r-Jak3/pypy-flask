@@ -28,8 +28,20 @@ target "docker-metadata-action" {
 
 target "slim-release" {
     inherits = ["slim", "docker-metadata-action"]
+        cache-to = [
+        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
+    ]
+    cache-from = [
+        "ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
+    ]
 }
 
 target "alpine-release" {
     inherits = ["alpine", "docker-metadata-action"]
+    cache-to = [
+        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
+    ]
+    cache-from = [
+        "ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
+    ]
 }
