@@ -10,16 +10,17 @@ on:
       - .github/workflows/docker.yml
       - '*.Dockerfile'
       - requirements.txt
+      - docker-bake.hcl
 
 
 jobs:
-  Slim:
+  Bake:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        bake-target: ["alpine", "slim"]
     steps:
-
-    - name: Checkout
-      uses: actions/checkout@v2
-
     - name: Login to Docker
       uses: docker/login-action@v1
       if: ${{ startsWith(github.ref, 'refs/tags/v') }}
@@ -63,77 +64,15 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1.5.1
 
-    - name: Slim Build and Push
-      uses: docker/build-push-action@v2.7.0
-      with:
-        platforms: linux/amd64,linux/arm64,linux/386
-        cache-from: ghcr.io/cyb3r-jak3/pypy-flask:slim-cache
-        cache-to: type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:slim-cache
-        push: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        file: slim.Dockerfile
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-
-  Alpine:
-    runs-on: ubuntu-latest
-    steps:
-
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Login to Docker
-      uses: docker/login-action@v1
-      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    - name: Build
+      uses: docker/bake-action@v1.5.0
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Login To GitHub
-      uses: docker/login-action@v1 
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.CR_PAT }}
-
-    - name: Login To GitLab
-      uses: docker/login-action@v1
-      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
-      with:
-        registry: registry.gitlab.com
-        username: ${{ secrets.GITLAB_USER }}
-        password: ${{ secrets.GITLAB_TOKEN }}
-
-    - name: Docker Meta
-      id: meta
-      uses: docker/metadata-action@v3.5.0
-      with:
-        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
-        flavor: |
-          suffix=-alpine,onlatest=true
-        tags: |
-          type=ref,event=pr
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=sha
-        labels: |
-          org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
-          org.label-schema.schema-version=1.0.0-rc1
-          maintainer=Cyb3r Jak3 jake@jwhite.network
-          org.opencontainers.image.vendor=cyb3rjak3
-
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1.2.0
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1.5.1
-
-    - name: Alpine Build and Push
-      uses: docker/build-push-action@v2.7.0
-      with:
-        platforms: linux/amd64,linux/arm64,linux/386,linux/s390x
-        cache-from: ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache
-        cache-to: type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache
+        files: |
+          ./docker-bake.hcl
+          ${{ steps.meta.outputs.bake-file }}
+        targets: ${{ matrix.bake-target }}-release
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        file: alpine.Dockerfile
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        pull: true

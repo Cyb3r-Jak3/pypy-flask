@@ -12,6 +12,7 @@ updates:
         - "Cyb3r-Jak3"
     commit-message:
       prefix: "Docker Update"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -24,6 +25,7 @@ updates:
         - "Cyb3r-Jak3"
     commit-message:
       prefix: "Action Update"
+
   - package-ecosystem: "pip"
     directory: "/"
     labels:
