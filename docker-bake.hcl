@@ -1,18 +1,18 @@
 target "slim" {
     dockerfile = "slim.Dockerfile"
     tags = [
-        "cyb3rjak3/pypy-flask",
-        "ghcr.io/cyb3r-jak3/pypy-flask",
-        "registry.gitlab.com/cyb3r-jak3/pypy-flask",
+        "cyb3rjak3/pypy-flask:slim",
+        "ghcr.io/cyb3r-jak3/pypy-flask:slim",
+        "registry.gitlab.com/cyb3r-jak3/pypy-flask:slim",
     ]
 }
 
 target "alpine" {
     dockerfile = "alpine.Dockerfile"
     tags = [
-        "cyb3rjak3/pypy-flask",
-        "ghcr.io/cyb3r-jak3/pypy-flask",
-        "registry.gitlab.com/cyb3r-jak3/pypy-flask",
+        "cyb3rjak3/pypy-flask:alpine",
+        "ghcr.io/cyb3r-jak3/pypy-flask:alpine",
+        "registry.gitlab.com/cyb3r-jak3/pypy-flask:alpine",
     ]
 }
 
