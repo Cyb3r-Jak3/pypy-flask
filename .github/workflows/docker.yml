@@ -26,9 +26,11 @@ jobs:
         id: set-matrix
         run:
           output=$(cat ./matrix.json)
+          jq . ${output}
           output="${output//'%'/'%25'}"
           output="${output//$'\n'/'%0A'}"
           output="${output//$'\r'/'%0D'}"
+          jq . ${output}
           echo "::set-output name=matrix::$output"
 
       - name: Check Matrix
