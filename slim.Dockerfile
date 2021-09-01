@@ -15,4 +15,5 @@ RUN pip --no-cache-dir install -U \
 
 RUN rm -rf /var/lib/apt/lists/* \
     && apt purge build-essential -y \
-    && apt autoremove -y
+    && apt autoremove -y \
+    && pip cache purge

@@ -12,4 +12,5 @@ RUN pip --no-cache-dir install -U \
     gunicorn==${GUNICORN_VERSION} \
     gevent==${GEVENT_VERSION}
 
-RUN apk del .build-deps
+RUN apk del .build-deps \
+    && pip cache purge

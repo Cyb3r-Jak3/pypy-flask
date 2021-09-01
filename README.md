@@ -1,6 +1,6 @@
 # PyPy Flask
 
-Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is available from DockerHub, Github, and Gitlab.
+Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is available from DockerHub, GitHub, and Gitlab.
 
 ## Using
 

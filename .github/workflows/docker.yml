@@ -97,5 +97,5 @@ jobs:
           ${{ matrix.bake-target }}-release.args.FLASK_VERSION=${{ matrix.flask }}
           ${{ matrix.bake-target }}-release.args.GUNICORN_VERSION=${{ matrix.gunicorn }}
           ${{ matrix.bake-target }}-release.args.GEVENT_VERSION=${{ matrix.gevent }}
-          ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask:cache-${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
-          ${{ matrix.bake-target }}-release.cache-to=type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:cache-${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          ${{ matrix.bake-target }}-release.cache-from=type=gha,scope=buildkit-${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          ${{ matrix.bake-target }}-release.cache-to=type=gha,mode=max,scope=buildkit-${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
