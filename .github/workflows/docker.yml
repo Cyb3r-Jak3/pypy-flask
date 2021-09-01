@@ -24,7 +24,7 @@ jobs:
 
       - name: Load JSON to matrix
         id: set-matrix
-        run:
+        run: |
           output=$(cat ./matrix.json)
           jq . ${output}
           output="${output//'%'/'%25'}"
