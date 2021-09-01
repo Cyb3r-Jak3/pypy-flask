@@ -31,12 +31,6 @@ jobs:
           output="${output//$'\r'/'%0D'}"
           echo "::set-output name=matrix::$output"
 
-      # - name: Check Matrix
-      #   env:
-      #     TO_CHECK: ${{steps.set-matrix.outputs.matrix}}
-      #   run:
-      #     jq . ${TO_CHECK}
-
   Bake:
     needs: matrix
     runs-on: ubuntu-latest
@@ -71,11 +65,11 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3.5.0
       with:
+        flavor: |
+          latest=false
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         tags: |
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=sha
+          type=raw,value=${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
@@ -100,3 +94,9 @@ jobs:
         targets: ${{ matrix.bake-target }}-release
         push: ${{ startsWith(github.ref, 'refs/tags/v') }}
         pull: true
+        set: |
+          ${{ matrix.bake-target }}-release.args.FLASK_VERSION=${{ matrix.flask }}
+          ${{ matrix.bake-target }}-release.args.GUNICORN_VERSION=${{ matrix.gunicorn }}
+          ${{ matrix.bake-target }}-release.args.GEVENT_VERSION=${{ matrix.gevent }}
+          ${{ matrix.bake-target }}-release.cache-from="ghcr.io/cyb3r-jak3/pypy-flask:cache-${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}"
+          ${{ matrix.bake-target }}-release.cache-to="type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:cache-${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}"
