@@ -19,6 +19,9 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:  
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Load JSON to matrix
         id: set-matrix
         run:
