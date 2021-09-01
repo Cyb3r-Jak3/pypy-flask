@@ -14,10 +14,10 @@ on:
 
 
 jobs:
-  Build_Matrix:
+  matrix:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      built_matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:  
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,12 +31,18 @@ jobs:
           output="${output//$'\r'/'%0D'}"
           echo "::set-output name=matrix::$content"
 
+      - name: Check Matrix
+        env:
+          TO_CHECK: ${{steps.set-matrix.outputs.matrix}}
+        run:
+          jq . ${TO_CHECK}
+
   Bake:
-    needs: Build_Matrix
+    needs: matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.Build_Matrix.outputs.matrix)}}
+      matrix: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
 
     steps:
     - name: Login to Docker
