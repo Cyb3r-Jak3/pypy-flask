@@ -1,6 +1,6 @@
 # PyPy Flask
 
-Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is available from DockerHub, GitHub, and Gitlab.
+Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time by wrapping it all into one repo. This image is available from DockerHub, GitHub, and Gitlab.
 
 ## Tags
 
@@ -33,7 +33,7 @@ Slim images are build using the [official pypy image](https://hub.docker.com/_/p
 
 ### Alpine
 
-There are also alpine based images available. This are build using [this container](https://hub.docker.com/r/jamiehewland/alpine-pypy/)
+There are also alpine-based images available. This are build using [this container](https://hub.docker.com/r/jamiehewland/alpine-pypy/)
 
 - ghcr.io/cyb3r-jak3/pypy-flask:alpine
 - cyb3rjak3/pypy-flask:alpine
