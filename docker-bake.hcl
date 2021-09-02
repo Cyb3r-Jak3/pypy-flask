@@ -19,19 +19,19 @@ target "docker-metadata-action" {
 target "slim-release" {
     inherits = ["slim", "docker-metadata-action"]
     cache-to = [
-        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
+        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:slim"
     ]
     cache-from = [
-        "ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
+        "ghcr.io/cyb3r-jak3/pypy-flask-cache:slim"
     ]
 }
 
 target "alpine-release" {
     inherits = ["alpine", "docker-metadata-action"]
     cache-to = [
-        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
+        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
     ]
     cache-from = [
-        "ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
+        "ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
     ]
 }
