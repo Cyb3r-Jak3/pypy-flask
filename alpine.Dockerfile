@@ -1,10 +1,16 @@
 FROM jamiehewland/alpine-pypy:3-alpine3.11
 
+ARG FLASK_VERSION=2.0.1
+ARG GUNICORN_VERSION=20.1.0
+ARG GEVENT_VERSION=21.8.0
 
-RUN apk add --no-cache libffi-dev gcc musl-dev make build-base
+RUN apk add --no-cache --virtual .build-deps libffi-dev gcc musl-dev make build-base
 
-COPY requirements.txt /tmp/pip-tmp/
-RUN pip --disable-pip-version-check --no-cache-dir install -U pip -r /tmp/pip-tmp/requirements.txt \
-   && rm -rf /tmp/pip-tmp
+RUN pip --no-cache-dir install -U \
+    pip \
+    Flask==${FLASK_VERSION} \
+    gunicorn==${GUNICORN_VERSION} \
+    gevent==${GEVENT_VERSION}
 
-RUN apk del libffi-dev gcc musl-dev make build-base
+RUN apk del .build-deps \
+    && pip cache purge

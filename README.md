@@ -1,6 +1,10 @@
 # PyPy Flask
 
-Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is available from DockerHub, Github, and Gitlab.
+Docker base image for deploying python applications on pypy with flask, gunicorn and gevent. Saves on container build time with wrapping it all into one repo. This image is available from DockerHub, GitHub, and Gitlab.
+
+## Tags
+
+Images are tagged in the format: `slim|alpine-FlaskVersion-GunicornVersion-GeventVersion` i.e. `ghcr.io/cyb3r-jak3/pypy-flask:alpine-2.0.1-20.1.0-21.8.0`. There is also just plain `slim|alpine` which is always the latest versions i.e. `ghcr.io/cyb3r-jak3/pypy-flask:alpine`
 
 ## Using
 
@@ -23,7 +27,7 @@ You can replace the FROM image with any of the following:
 
 - ghcr.io/cyb3r-jak3/pypy-flask:slim
 - cyb3rjak3/pypy-flask:slim
-- registry.gitlab.com/cyb3r-jak3/pypy-flask:latest
+- registry.gitlab.com/cyb3r-jak3/pypy-flask:slim
 
 Slim images are build using the [official pypy image](https://hub.docker.com/_/pypy/)
 

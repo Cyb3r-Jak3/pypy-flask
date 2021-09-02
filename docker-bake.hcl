@@ -1,19 +1,9 @@
 target "slim" {
     dockerfile = "slim.Dockerfile"
-    tags = [
-        "cyb3rjak3/pypy-flask:slim",
-        "ghcr.io/cyb3r-jak3/pypy-flask:slim",
-        "registry.gitlab.com/cyb3r-jak3/pypy-flask:slim",
-    ]
 }
 
 target "alpine" {
     dockerfile = "alpine.Dockerfile"
-    tags = [
-        "cyb3rjak3/pypy-flask:alpine",
-        "ghcr.io/cyb3r-jak3/pypy-flask:alpine",
-        "registry.gitlab.com/cyb3r-jak3/pypy-flask:alpine",
-    ]
 }
 
 // Special target: https://github.com/docker/metadata-action#bake-definition
@@ -27,21 +17,21 @@ target "docker-metadata-action" {
 }
 
 target "slim-release" {
-    inherits = ["docker-metadata-action", "slim"]
+    inherits = ["slim", "docker-metadata-action"]
     cache-to = [
-        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
+        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:slim"
     ]
     cache-from = [
-        "ghcr.io/cyb3r-jak3/pypy-flask:slim-cache"
+        "ghcr.io/cyb3r-jak3/pypy-flask-cache:slim"
     ]
 }
 
 target "alpine-release" {
-    inherits = ["docker-metadata-action", "alpine"]
+    inherits = ["alpine", "docker-metadata-action"]
     cache-to = [
-        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
+        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
     ]
     cache-from = [
-        "ghcr.io/cyb3r-jak3/pypy-flask:alpine-cache"
+        "ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
     ]
 }
