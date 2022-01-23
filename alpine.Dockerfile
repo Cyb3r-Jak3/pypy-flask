@@ -2,7 +2,7 @@ FROM jamiehewland/alpine-pypy:3-alpine3.11
 
 ARG FLASK_VERSION=2.0.2
 ARG GUNICORN_VERSION=20.1.0
-ARG GEVENT_VERSION=21.8.0
+ARG GEVENT_VERSION=21.12.0
 
 RUN apk add --no-cache --virtual .build-deps libffi-dev gcc musl-dev make build-base
 
