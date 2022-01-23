@@ -32,9 +32,11 @@ jobs:
           output="${output//$'\r'/'%0D'}"
           echo "::set-output name=matrix::$output"
 
-  Bake:
+  Bake_Slim:
     needs: matrix
     runs-on: ubuntu-latest
+    env:
+      BAKE_TARGET: slim
     strategy:
       matrix: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
 
@@ -69,7 +71,7 @@ jobs:
           latest=false
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         tags: |
-          type=raw,value=${{ matrix.bake-target }}:${{ matrix.pypy-version }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          type=raw,value=${{ env.BAKE_TARGET }}-${{ matrix.pypy-version }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
@@ -100,6 +102,78 @@ jobs:
           ${{ matrix.bake-target }}-release.args.GEVENT_VERSION=${{ matrix.gevent }}
           ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
           ${{ matrix.bake-target }}-release.cache-to=type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+
+Bake_Alpine:
+    needs: matrix
+    runs-on: ubuntu-latest
+    env:
+      BAKE_TARGET: slim
+    strategy:
+      matrix: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
+
+    steps:
+    - name: Login to Docker
+      uses: docker/login-action@v1
+      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Login To GitHub
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
+
+    - name: Login To GitLab
+      uses: docker/login-action@v1
+      if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      with:
+        registry: registry.gitlab.com
+        username: ${{ secrets.GITLAB_USER }}
+        password: ${{ secrets.GITLAB_TOKEN }}
+
+    - name: Docker Meta
+      id: meta
+      uses: docker/metadata-action@v3.6.2
+      with:
+        flavor: |
+          latest=false
+        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
+        tags: |
+          type=raw,value=${{ env.BAKE_TARGET }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+        labels: |
+          org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
+          org.label-schema.schema-version=1.0.0-rc1
+          maintainer=Cyb3r Jak3 jake@jwhite.network
+          org.opencontainers.image.vendor=cyb3rjak3
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1.2.0
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1.6.0
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build
+      uses: docker/bake-action@v1.6.0
+      with:
+        files: |
+          ./docker-bake.hcl
+          ${{ steps.meta.outputs.bake-file }}
+        targets: ${{ matrix.bake-target }}-release
+        push: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        pull: true
+        set: |
+          ${{ matrix.bake-target }}-release.args.FLASK_VERSION=${{ matrix.flask }}
+          ${{ matrix.bake-target }}-release.args.GUNICORN_VERSION=${{ matrix.gunicorn }}
+          ${{ matrix.bake-target }}-release.args.GEVENT_VERSION=${{ matrix.gevent }}
+          ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          ${{ matrix.bake-target }}-release.cache-to=type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+
 
   Bake_Latest:
     runs-on: ubuntu-latest
