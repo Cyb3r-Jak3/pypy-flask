@@ -68,7 +68,7 @@ jobs:
           latest=false
         images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         tags: |
-          type=raw,value=${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          type=raw,value=${{ matrix.bake-target }}:${{ matrix.pypy-version }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
