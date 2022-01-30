@@ -11,7 +11,7 @@ on:
       - '*.Dockerfile'
       - docker-bake.hcl
 
-
+jobs:
   Bake_Latest:
     runs-on: ubuntu-latest
     strategy:
