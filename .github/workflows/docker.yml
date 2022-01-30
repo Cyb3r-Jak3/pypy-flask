@@ -107,7 +107,7 @@ jobs:
       needs: matrix
       runs-on: ubuntu-latest
       env:
-        BAKE_TARGET: slim
+        BAKE_TARGET: alpine
       strategy:
         matrix: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
 
