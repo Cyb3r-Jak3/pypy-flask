@@ -21,7 +21,7 @@ jobs:
       built_matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:  
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Load JSON to matrix
         id: set-matrix
@@ -83,7 +83,7 @@ jobs:
       uses: docker/setup-buildx-action@v1.6.0
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Build
       uses: docker/bake-action@v1.6.0
@@ -152,7 +152,7 @@ jobs:
       uses: docker/setup-buildx-action@v1.6.0
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Build
       uses: docker/bake-action@v1.6.0
