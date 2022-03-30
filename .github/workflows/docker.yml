@@ -105,8 +105,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        bake-target: ['alpine', 'slim']
-
+        bake-target: ['slim']
+# 'alpine'
     steps:
     - name: Login to Docker
       uses: docker/login-action@v1
