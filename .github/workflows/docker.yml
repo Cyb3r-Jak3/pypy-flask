@@ -31,16 +31,18 @@ jobs:
           output="${output//$'\n'/'%0A'}"
           output="${output//$'\r'/'%0D'}"
           echo "::set-output name=matrix::$output"
+          echo $output | jq
 
   Bake:
     needs: matrix
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        ${{ include }}: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
-        exclude:
-          - bake-target: alpine
-            flask: 2.1.0
+      matrix: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
+      # matrix:
+      #   ${{ include }}: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
+      #   exclude:
+      #     - bake-target: alpine
+      #       flask: 2.1.0
 
     steps:
     - name: Login to Docker
