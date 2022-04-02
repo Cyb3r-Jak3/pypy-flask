@@ -4,12 +4,12 @@ Docker base image for deploying python applications on pypy with flask, gunicorn
 
 ## Tags
 
-Images are tagged in the format: `slim|alpine-FlaskVersion-GunicornVersion-GeventVersion` i.e. `ghcr.io/cyb3r-jak3/pypy-flask:alpine-2.0.1-20.1.0-21.8.0`. There is also just plain `slim|alpine` which is always the latest versions i.e. `ghcr.io/cyb3r-jak3/pypy-flask:alpine`
+Images are tagged in the format: `slim|alpine-FlaskVersion-GunicornVersion-GeventVersion` i.e. `ghcr.io/cyb3r-jak3/pypy-flask:alpine-2.0.1-20.1.0-21.8.0`. There is also just plain `slim|alpine` which is always the latest versions i.e. `ghcr.io/cyb3r-jak3/pypy-flask:slim`
 
 ## Using
 
 ```docker
-    FROM cyb3rjak3/pypy-flask:alpine
+    FROM cyb3rjak3/pypy-flask:slim
 
     # If there are other requirements for the application
     COPY requirements.txt /tmp/pip-tmp/
