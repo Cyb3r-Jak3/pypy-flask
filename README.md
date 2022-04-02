@@ -38,3 +38,7 @@ There are also alpine-based images available. This are build using [this contain
 - ghcr.io/cyb3r-jak3/pypy-flask:alpine
 - cyb3rjak3/pypy-flask:alpine
 - registry.gitlab.com/cyb3r-jak3/pypy-flask:alpine
+
+#### Note
+
+The latest version of Flask that the alpine version supports is `2.0.3`. If you need a Flask version higher than that then you must switch to `slim` tags.
