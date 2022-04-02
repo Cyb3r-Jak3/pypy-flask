@@ -27,16 +27,23 @@ jobs:
         id: set-matrix
         run: |
           output=$(cat ./matrix.json)
+          echo $output | jq
           output="${output//'%'/'%25'}"
           output="${output//$'\n'/'%0A'}"
           output="${output//$'\r'/'%0D'}"
           echo "::set-output name=matrix::$output"
+         
 
   Bake:
     needs: matrix
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
+      # matrix:
+      #   ${{ include }}: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
+      #   exclude:
+      #     - bake-target: alpine
+      #       flask: 2.1.0
 
     steps:
     - name: Login to Docker
@@ -102,6 +109,7 @@ jobs:
           ${{ matrix.bake-target }}-release.cache-to=type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
 
   Bake_Latest:
+    needs: matrix
     runs-on: ubuntu-latest
     strategy:
       matrix: 
