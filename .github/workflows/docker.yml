@@ -43,7 +43,7 @@ jobs:
         exclude:
           - bake-target: alpine
             flask: 2.1.0
-          - bake-target:
+          - bake-target: alpine
             flask: 2.1.1
 
     steps:
