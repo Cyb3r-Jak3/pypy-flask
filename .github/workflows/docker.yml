@@ -45,6 +45,8 @@ jobs:
             flask: 2.1.0
           - bake-target: alpine
             flask: 2.1.1
+          - bake-target: alpine
+            flask: 2.1.2
 
     steps:
     - name: Login to Docker
