@@ -2,9 +2,9 @@ target "slim" {
     dockerfile = "slim.Dockerfile"
 }
 
-target "alpine" {
-    dockerfile = "alpine.Dockerfile"
-}
+// target "alpine" {
+//     dockerfile = "alpine.Dockerfile"
+// }
 
 // Special target: https://github.com/docker/metadata-action#bake-definition
 target "docker-metadata-action" {
@@ -26,12 +26,12 @@ target "slim-release" {
     ]
 }
 
-target "alpine-release" {
-    inherits = ["alpine", "docker-metadata-action"]
-    cache-to = [
-        "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
-    ]
-    cache-from = [
-        "ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
-    ]
-}
+// target "alpine-release" {
+//     inherits = ["alpine", "docker-metadata-action"]
+//     cache-to = [
+//         "type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
+//     ]
+//     cache-from = [
+//         "ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
+//     ]
+// }

@@ -31,14 +31,11 @@ You can replace the FROM image with any of the following:
 
 Slim images are build using the [official pypy image](https://hub.docker.com/_/pypy/)
 
-### Alpine
+~~### Alpine~~
+Alpine is no longer supported for new versions. The latest version of Flask that the alpine version supports is `2.0.3`. If you need a Flask version higher than that then you must switch to `slim` tags.
+~~There are also alpine-based images available. This are build using [this container](https://hub.docker.com/r/jamiehewland/alpine-pypy/)~~
 
-There are also alpine-based images available. This are build using [this container](https://hub.docker.com/r/jamiehewland/alpine-pypy/)
-
-- ghcr.io/cyb3r-jak3/pypy-flask:alpine
-- cyb3rjak3/pypy-flask:alpine
-- registry.gitlab.com/cyb3r-jak3/pypy-flask:alpine
-
-#### Note
-
-The latest version of Flask that the alpine version supports is `2.0.3`. If you need a Flask version higher than that then you must switch to `slim` tags.
+~~- ghcr.io/cyb3r-jak3/pypy-flask:alpine
+~~- cyb3rjak3/pypy-flask:alpine~~
+~~- registry.gitlab.com/cyb3r-jak3/pypy-flask:alpine~~
+~~
