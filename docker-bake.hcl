@@ -12,7 +12,6 @@ target "docker-metadata-action" {
         "linux/amd64",
         "linux/arm64",
         "linux/386",
-        "linux/s390x"
     ]
 }
 
