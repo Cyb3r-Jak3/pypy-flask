@@ -9,7 +9,7 @@ on:
       - '*.Dockerfile'
       - requirements.txt
       - docker-bake.hcl
-      - "matrix.json"
+      - matrix.json
 
 
 jobs:
