@@ -63,7 +63,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v4.0.1
+      uses: docker/metadata-action@v4.1.0
       with:
         flavor: |
           latest=false
@@ -133,7 +133,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v4.0.1
+      uses: docker/metadata-action@v4.1.0
       with:
         flavor: |
           latest=false
