@@ -2,7 +2,7 @@ FROM pypy:3-slim-buster
 
 ARG FLASK_VERSION=2.2.2
 ARG GUNICORN_VERSION=20.1.0
-ARG GEVENT_VERSION=22.10.1
+ARG GEVENT_VERSION=22.10.2
 
 RUN apt-get update \
     && apt install --no-install-recommends -y build-essential
