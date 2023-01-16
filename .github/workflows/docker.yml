@@ -39,7 +39,7 @@ jobs:
           output="${output//'%'/'%25'}"
           output="${output//$'\n'/'%0A'}"
           output="${output//$'\r'/'%0D'}"
-          echo "name=matrix" >> $GITHUB_OUTPUT
+          echo "::set-output name=matrix::$output"
          
 
   Bake:
