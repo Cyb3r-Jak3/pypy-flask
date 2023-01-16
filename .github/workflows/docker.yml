@@ -39,7 +39,7 @@ jobs:
           output="${output//'%'/'%25'}"
           output="${output//$'\n'/'%0A'}"
           output="${output//$'\r'/'%0D'}"
-          echo "::set-output name=matrix::$output"
+          echo "name=matrix" >> $GITHUB_OUTPUT
          
 
   Bake:
@@ -154,7 +154,7 @@ jobs:
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
-          maintainer=Cyb3r Jak3 jake@jwhite.network
+          maintainer=Cyb3r Jak3 git@cyberjake.xyz
           org.opencontainers.image.vendor=cyb3rjak3
 
     - name: Set up QEMU
