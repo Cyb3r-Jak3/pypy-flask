@@ -46,6 +46,7 @@ jobs:
     needs: matrix
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         ${{ insert }}: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
     steps:
@@ -73,7 +74,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v4.1.1
+      uses: docker/metadata-action@v4.3.0
       with:
         flavor: |
           latest=false
@@ -143,7 +144,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v4.1.1
+      uses: docker/metadata-action@v4.3.0
       with:
         flavor: |
           latest=false
@@ -153,7 +154,7 @@ jobs:
         labels: |
           org.label-schema.vcs-url=https://github.com/Cyb3r-Jak3/pypy-flask.git
           org.label-schema.schema-version=1.0.0-rc1
-          maintainer=Cyb3r Jak3 jake@jwhite.network
+          maintainer=Cyb3r Jak3 git@cyberjake.xyz
           org.opencontainers.image.vendor=cyb3rjak3
 
     - name: Set up QEMU
