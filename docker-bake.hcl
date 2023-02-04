@@ -33,4 +33,7 @@ target "alpine-release" {
     cache-from = [
         "ghcr.io/cyb3r-jak3/pypy-flask-cache:alpine"
     ]
+    platforms = [
+        "linux/amd64",
+    ]
 }
