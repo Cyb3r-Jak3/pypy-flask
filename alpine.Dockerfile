@@ -1,6 +1,6 @@
-FROM jamiehewland/alpine-pypy:3-alpine3.11
+FROM ghcr.io/cyb3r-jak3/alpine-pypy:3.9-7.3.11-3.17
 
-ARG FLASK_VERSION=2.0.3
+ARG FLASK_VERSION=2.2.2
 ARG GUNICORN_VERSION=20.1.0
 ARG GEVENT_VERSION=21.12.0
 
