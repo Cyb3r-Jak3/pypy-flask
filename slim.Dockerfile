@@ -1,4 +1,4 @@
-FROM pypy:3-slim-buster
+FROM pypy:3-slim-bullseye
 
 ARG FLASK_VERSION=2.2.2
 ARG GUNICORN_VERSION=20.1.0
