@@ -21,6 +21,10 @@ on:
       - docker-bake.hcl
       - matrix.json
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   DOCKER_USERNAME: cyb3rjak3
   GITLAB_USER: Cyb3r-Jak3
