@@ -13,14 +13,6 @@ on:
       - docker-bake.hcl
       - matrix.json
 
-  pull_request:
-    paths:
-      - .github/workflows/docker.yml
-      - '*.Dockerfile'
-      - requirements.txt
-      - docker-bake.hcl
-      - matrix.json
-
 permissions:
   contents: read
   packages: write
