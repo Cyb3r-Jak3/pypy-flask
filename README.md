@@ -38,3 +38,10 @@ There are also alpine-based images available. This are build using [this contain
 ghcr.io/cyb3r-jak3/pypy-flask:alpine
 cyb3rjak3/pypy-flask:alpine
 registry.gitlab.com/cyb3r-jak3/pypy-flask:alpine
+
+#### Updating
+
+When there is a new version released need to change it in:
+
+- Both Dockerfiles ([slim](slim.Dockerfile) and [alpine](alpine.Dockerfile))
+- [matrix.json](matrix.json)
