@@ -29,7 +29,7 @@ jobs:
   matrix:
     runs-on: ubuntu-latest
     outputs:
-      built_matrix: ${{ steps.set-matrix.outputs.MATRIX }}
+      built_matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:  
       - name: Checkout
         uses: actions/checkout@v3
@@ -42,10 +42,14 @@ jobs:
           output="${output//'%'/'%25'}"
           output="${output//$'\n'/'%0A'}"
           output="${output//$'\r'/'%0D'}"
+          echo "::set-output name=matrix::$output"
           echo "MATRIX=$output" >> $GITHUB_OUTPUT
 
-      - name: Check Matrix
-        run: echo "The selected color is ${{ steps.set-matrix.outputs.MATRIX }}"
+      - name: Check Matrix (new)
+        run: echo "${{ steps.set-matrix.outputs.matrix }}" | jq
+      
+      - name: Check Matrix (old)
+        run: echo "${{ steps.set-matrix.outputs.MATRIX }}" | jq
          
 # echo "::set-output name=matrix::$output" 
 
