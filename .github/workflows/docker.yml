@@ -46,8 +46,8 @@ jobs:
 
 # echo "MATRIX=$output" >> $GITHUB_OUTPUT
 
-      - name: Check Matrix (old)
-        run: echo "${{ steps.set-matrix.outputs.matrix }}" | jq
+      # - name: Check Matrix (old)
+      #   run: echo "${{ steps.set-matrix.outputs.matrix }}" | jq
 
       # - name: Check Matrix (new)
       #   run: echo "${{ steps.set-matrix.outputs.MATRIX }}" | jq
