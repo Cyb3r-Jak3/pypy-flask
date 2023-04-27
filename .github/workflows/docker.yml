@@ -45,11 +45,12 @@ jobs:
           echo "::set-output name=matrix::$output"
           echo "MATRIX=$output" >> $GITHUB_OUTPUT
 
-      - name: Check Matrix (new)
-        run: echo "${{ steps.set-matrix.outputs.matrix }}" | jq
-      
       - name: Check Matrix (old)
         run: echo "${{ steps.set-matrix.outputs.MATRIX }}" | jq
+
+      - name: Check Matrix (new)
+        run: echo "${{ steps.set-matrix.outputs.matrix }}" | jq
+
          
 # echo "::set-output name=matrix::$output" 
 
