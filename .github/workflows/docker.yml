@@ -45,27 +45,6 @@ jobs:
           with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
               print(f'matrix={data}', file=fh)
 
-      # - name: Load JSON to matrix
-      #   id: set-matrix
-      #   run: |
-      #     output=$(cat ./matrix.json)
-      #     echo $output | jq
-      #     output="${output//'%'/'%25'}"
-      #     output="${output//$'\n'/'%0A'}"
-      #     output="${output//$'\r'/'%0D'}"
-      #     echo "::set-output name=matrix::$output"
-
-# echo "MATRIX=$output" >> $GITHUB_OUTPUT
-
-      # - name: Check Matrix (old)
-      #   run: echo "${{ steps.set-matrix.outputs.matrix }}" | jq
-
-      # - name: Check Matrix (new)
-      #   run: echo "${{ steps.set-matrix.outputs.MATRIX }}" | jq
-
-         
-# echo "::set-output name=matrix::$output" 
-
   Bake:
     needs: matrix
     runs-on: ubuntu-latest
