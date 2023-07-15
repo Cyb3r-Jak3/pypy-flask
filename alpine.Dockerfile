@@ -1,4 +1,4 @@
-FROM ghcr.io/cyb3r-jak3/alpine-pypy:3.9-7.3.11-3.17
+FROM ghcr.io/cyb3r-jak3/alpine-pypy:3.10-7.3.12-3.18
 
 ARG FLASK_VERSION=2.3.2
 ARG GUNICORN_VERSION=20.1.0
