@@ -1,4 +1,4 @@
 # File is only used with dependabot to keep up with latest versions
 Flask==2.3.2
-gunicorn==20.1.0
+gunicorn==21.0.1
 gevent==23.7.0
