@@ -2,7 +2,7 @@ FROM pypy:3-slim-bookworm
 
 ARG FLASK_VERSION=3.0.2
 ARG GUNICORN_VERSION=21.2.0
-ARG GEVENT_VERSION=23.9.1
+ARG GEVENT_VERSION=24.2.1
 
 RUN apt-get update \
     && apt install --no-install-recommends -y build-essential
