@@ -9,6 +9,10 @@ RUN apt-get update \
 
 RUN pip --no-cache-dir install -U \
     pip \
+    wheel \
+    setuptools
+
+RUN pip --no-cache-dir install -U \
     Flask==${FLASK_VERSION} \
     gunicorn==${GUNICORN_VERSION} \
     gevent==${GEVENT_VERSION}

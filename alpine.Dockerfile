@@ -8,6 +8,10 @@ RUN apk add --no-cache --virtual .build-deps libffi-dev gcc musl-dev make build-
 
 RUN pip --no-cache-dir install -U \
     pip \
+    wheel \
+    setuptools
+
+RUN pip --no-cache-dir install -U \
     Flask==${FLASK_VERSION} \
     gunicorn==${GUNICORN_VERSION} \
     gevent==${GEVENT_VERSION}
