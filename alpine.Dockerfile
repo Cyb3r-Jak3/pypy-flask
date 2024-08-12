@@ -1,7 +1,7 @@
 FROM ghcr.io/cyb3r-jak3/alpine-pypy:3.10-7.3.16-3.19
 
 ARG FLASK_VERSION=3.0.3
-ARG GUNICORN_VERSION=22.0.0
+ARG GUNICORN_VERSION=23.0.0
 ARG GEVENT_VERSION=24.2.1
 
 RUN apk add --no-cache --virtual .build-deps libffi-dev gcc musl-dev make build-base
