@@ -6,12 +6,12 @@ ARG GEVENT_VERSION=24.2.1
 
 RUN --mount=type=cache,target=/var/cache/apk,sharing=locked apk add --virtual .build-deps libffi-dev gcc musl-dev make build-base
 
-RUN --mount=type=cache,target=/root/.cache/pip pip pip install -U \
+RUN --mount=type=cache,target=/root/.cache/pip pip install -U \
     pip \
     wheel \
     setuptools
 
-RUN --mount=type=cache,target=/root/.cache/pip pip pip install -U \
+RUN --mount=type=cache,target=/root/.cache/pip pip install -U \
     Flask==${FLASK_VERSION} \
     gunicorn==${GUNICORN_VERSION} \
     gevent==${GEVENT_VERSION}
