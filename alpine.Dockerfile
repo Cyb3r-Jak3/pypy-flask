@@ -4,14 +4,14 @@ ARG FLASK_VERSION=3.0.3
 ARG GUNICORN_VERSION=23.0.0
 ARG GEVENT_VERSION=24.2.1
 
-RUN apk add --no-cache --virtual .build-deps libffi-dev gcc musl-dev make build-base
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked apk add --virtual .build-deps libffi-dev gcc musl-dev make build-base
 
-RUN pip --no-cache-dir install -U \
+RUN --mount=type=cache,target=/root/.cache/pip pip pip install -U \
     pip \
     wheel \
     setuptools
 
-RUN pip --no-cache-dir install -U \
+RUN --mount=type=cache,target=/root/.cache/pip pip pip install -U \
     Flask==${FLASK_VERSION} \
     gunicorn==${GUNICORN_VERSION} \
     gevent==${GEVENT_VERSION}
