@@ -129,6 +129,7 @@ jobs:
           ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}
           ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
           ${{ matrix.bake-target }}-release.cache-to=type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          ${{ matrix.bake-target }}-release.args.REGISTRY=docker.jfrog.cyberjake.xyz/
 
   Bake_Latest:
     needs: matrix

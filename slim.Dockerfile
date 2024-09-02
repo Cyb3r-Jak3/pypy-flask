@@ -1,4 +1,5 @@
-FROM pypy:3-slim-bookworm
+ARG REGISTRY 
+FROM ${REGISTRY}pypy:3-slim-bookworm
 
 ARG FLASK_VERSION=3.0.3
 ARG GUNICORN_VERSION=23.0.0
