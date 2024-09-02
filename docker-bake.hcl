@@ -23,6 +23,9 @@ target "slim-release" {
     cache-from = [
         "ghcr.io/cyb3r-jak3/pypy-flask-cache:slim"
     ]
+    args = {
+        "REGISTRY" = ""
+    }
 }
 
 target "alpine-release" {
@@ -37,4 +40,7 @@ target "alpine-release" {
         "linux/amd64",
         "linux/arm64",
     ]
+    args = {
+        "REGISTRY" = "ghcr.io/"
+    }
 }
