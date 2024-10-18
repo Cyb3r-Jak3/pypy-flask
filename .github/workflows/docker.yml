@@ -95,7 +95,7 @@ jobs:
       with:
         flavor: |
           latest=false
-        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask,mine.jfrog.cyberjake.xyz/pypy-flask
+        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         tags: |
           type=raw,value=${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
         labels: |
@@ -176,7 +176,7 @@ jobs:
       with:
         flavor: |
           latest=false
-        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask,mine.jfrog.cyberjake.xyz/pypy-flask
+        images: cyb3rjak3/pypy-flask,ghcr.io/cyb3r-jak3/pypy-flask,registry.gitlab.com/cyb3r-jak3/pypy-flask
         tags: |
           type=raw,value=${{ matrix.bake-target }}
         labels: |
