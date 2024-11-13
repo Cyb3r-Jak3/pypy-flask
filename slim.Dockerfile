@@ -3,7 +3,7 @@ FROM ${REGISTRY}pypy:3-slim-bookworm
 
 ARG FLASK_VERSION=3.0.3
 ARG GUNICORN_VERSION=23.0.0
-ARG GEVENT_VERSION=24.10.3
+ARG GEVENT_VERSION=24.11.1
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
