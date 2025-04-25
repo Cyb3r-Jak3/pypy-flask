@@ -3,7 +3,7 @@ FROM ${REGISTRY}cyb3r-jak3/alpine-pypy:3.10-7.3.17-3.20
 
 ARG FLASK_VERSION=3.1.0
 ARG GUNICORN_VERSION=23.0.0
-ARG GEVENT_VERSION=25.4.1
+ARG GEVENT_VERSION=25.4.2
 
 RUN --mount=type=cache,target=/var/cache/apk,sharing=locked apk add --virtual .build-deps libffi-dev gcc musl-dev make build-base
 
