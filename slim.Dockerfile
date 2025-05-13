@@ -6,12 +6,12 @@ ARG FLASK_VERSION=3.1.0
 ARG GUNICORN_VERSION=23.0.0
 ARG GEVENT_VERSION=25.5.1
 
-RUN --mount=type=cache,id=${TARGETPLATFORM}-${FLASK_VERSION}-${GUNICORN_VERSION}-${GUNICORN_VERSION},target=/var/cache/apt,sharing=locked \
+RUN --mount=type=cache,id=${TARGETPLATFORM},target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt install --no-install-recommends -y build-essential
 
-RUN --mount=type=cache,id=${TARGETPLATFORM}-${FLASK_VERSION}-${GUNICORN_VERSION}-${GUNICORN_VERSION},target=/root/.cache/pip \
+RUN --mount=type=cache,id=${TARGETPLATFORM},target=/root/.cache/pip \
     pip install -U \
     pip \
     wheel \

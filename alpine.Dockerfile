@@ -6,10 +6,10 @@ ARG FLASK_VERSION=3.1.0
 ARG GUNICORN_VERSION=23.0.0
 ARG GEVENT_VERSION=25.5.1
 
-RUN --mount=type=cache,id=${TARGETPLATFORM}-${FLASK_VERSION}-${GUNICORN_VERSION}-${GUNICORN_VERSION},target=/var/cache/apk,sharing=locked \
+RUN --mount=type=cache,id=${TARGETPLATFORM},target=/var/cache/apk,sharing=locked \
     apk add --virtual .build-deps libffi-dev gcc musl-dev make build-base
 
-RUN --mount=type=cache,id=${TARGETPLATFORM}-${FLASK_VERSION}-${GUNICORN_VERSION}-${GUNICORN_VERSION},target=/root/.cache/pip \
+RUN --mount=type=cache,id=${TARGETPLATFORM},target=/root/.cache/pip \
     pip install -U \
     pip \
     wheel \
