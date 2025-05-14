@@ -32,7 +32,7 @@ jobs:
       built_matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:  
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Load Matrix
         shell: python
@@ -97,7 +97,7 @@ jobs:
           org.opencontainers.image.vendor=cyb3rjak3
 
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Build
       uses: docker/bake-action@v6
@@ -171,7 +171,7 @@ jobs:
           org.opencontainers.image.vendor=cyb3rjak3
 
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Build
       uses: docker/bake-action@v6
