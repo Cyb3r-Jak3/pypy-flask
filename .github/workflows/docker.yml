@@ -100,7 +100,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build
-      uses: docker/bake-action@v6
+      uses: docker/bake-action@76f9fa3a758507623da19f6092dc4089a7e61592 # v6.6.0
       with:
         source: .
         files: |
@@ -174,7 +174,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build
-      uses: docker/bake-action@v6
+      uses: docker/bake-action@76f9fa3a758507623da19f6092dc4089a7e61592 # v6.6.0
       with:
         source: .
         files: |
