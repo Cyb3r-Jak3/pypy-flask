@@ -81,6 +81,13 @@ jobs:
         username: ${{ env.GITLAB_USER }}
         password: ${{ secrets.GITLAB_TOKEN }}
 
+    - name: Login to Docker
+      uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+      with:
+        registry: ${{ vars.SELF_HOSTED_REGISTRY_URL }}
+        username: ${{ secrets.SELF_HOSTED_REGISTRY_USERNAME }}
+        password: ${{ secrets.SELF_HOSTED_REGISTRY_PASSWORD }}
+
     - name: Docker Meta
       id: meta
       uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
@@ -118,6 +125,7 @@ jobs:
           ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}
           ${{ matrix.bake-target }}-release.cache-from=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
           ${{ matrix.bake-target }}-release.cache-to=type=registry,mode=max,ref=ghcr.io/cyb3r-jak3/pypy-flask-cache:${{ matrix.bake-target }}-${{ matrix.flask }}-${{ matrix.gunicorn }}-${{ matrix.gevent }}
+          slim-release.args.REGISTRY=${{ vars.SELF_HOSTED_REGISTRY_URL }}/
 
   Bake_Latest:
     needs: matrix
@@ -139,6 +147,13 @@ jobs:
       with:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Login to Docker
+      uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+      with:
+        registry: ${{ vars.SELF_HOSTED_REGISTRY_URL }}
+        username: ${{ secrets.SELF_HOSTED_REGISTRY_USERNAME }}
+        password: ${{ secrets.SELF_HOSTED_REGISTRY_PASSWORD }}
 
     - name: Login To GitHub
       uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
