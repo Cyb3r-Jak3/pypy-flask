@@ -1,5 +1,5 @@
 ARG REGISTRY 
-FROM ${REGISTRY}pypy:3-slim-bookworm
+FROM ${REGISTRY}pypy:3-slim-bookworm@sha256:32cfb77c6fea25c0b6287dfc6750ab9f08aa0e6f24c0eadbf57c6ff01ba7dd46
 
 ARG TARGETPLATFORM
 ARG FLASK_VERSION=3.1.1
